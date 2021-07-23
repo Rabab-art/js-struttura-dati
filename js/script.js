@@ -49,11 +49,23 @@ console.log(card);
 /*STAMPA IN PAGINA*/
 const cardSection = document.getElementById('card');
 
-let cardTemple = ` 
+const subType = card.subType ? `- ${card.subType} ` : '';
+let abilitiesContente = '<em> Nessuna Abilità</em>';
+if (card.abilities.length) {
+    abilitiesContente = '<ul>';
+    for (let i = 0; i < card.abilities.length; i++) {
+        const currentAbility = card.abilities[i];
+        abilitiesContente += ` <li>Descrizione:${currentAbility.description}</li>`;
+    }
+    abilitiesContente = '</ul>';
+};
+
+
+let cardTemple = `  
 <ul class="card">
 <li>Id:${card.id}</li>
 <li> Nome:${card.name}</li>
-<li>Costo di Lancio:${card.launchCosta}</li>
+<li>Costo di Lancio:${card.launchCost}</li>
 <li>Costo Mana Convertito:${card.combineManaCost}</li>
 <li>Tipo Carta:${card.cardType}</li>
 <li>Espansione
@@ -62,14 +74,10 @@ let cardTemple = `
 <li>Nome:${card.expansion.name}  </li>
 <li>Rartà:${card.expansion.rarity}  </li>
 <li>Numero Collezione:${card.expansion.collectionNr}/${card.expansion.totalCard} </li>
-
-
 </ul>
-
-
-
-
 </li>
+<li>Tesco di colore:${card.flavorTex.quote}/${card.flavorTex.author}</li>
+<li>Abilità:${abilitiesContente} </li>
 
 
 </ul>
