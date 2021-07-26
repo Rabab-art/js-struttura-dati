@@ -1,4 +1,4 @@
-const card = {
+const firstCard = {
     id: 1,
     name: 'Bloodfire Colosses',
     launchCost: ['6', 'R', 'R'],
@@ -44,58 +44,62 @@ const card = {
     },
 
 };
-console.log(card);
+console.log(firstCard);
 
 /*STAMPA IN PAGINA*/
-const cardSection = document.getElementById('card');
 
-const subType = card.subType ? `- ${card.subType} ` : '';
-let abilitiesContente = '<em> Nessuna Abilità</em>';
-if (card.abilities.length > 0) {
-    abilitiesContente = '<ul>';
-    for (let i = 0; i < card.abilities.length; i++) {
-        const currentAbility = card.abilities[i];
-        abilitiesContente += ` <li>Descrizione:${currentAbility.description}</li>`;
-        abilitiesContente += `<li>Costo di lancio: ${currentAbility.launchCost.join(',')}</li>`;
-    }
-    abilitiesContente += '</ul>';
+const cardSection = document.getElementById('cards');
+
+const cardTemplate = createCardTemplate(firstCard);
+
+cardSection.innerHTML = cardTemplate;
+
+function createCardTemplate(card) {
+    const subType = card.subType ? `- ${card.subType} ` : '';
+    let abilitiesContente = '<em> Nessuna Abilità</em>';
+    if (card.abilities.length > 0) {
+        abilitiesContente = '<ul>';
+        for (let i = 0; i < card.abilities.length; i++) {
+            const currentAbility = card.abilities[i];
+            abilitiesContente += ` <li>Descrizione:${currentAbility.description}</li>`;
+            abilitiesContente += `<li>Costo di lancio: ${currentAbility.launchCost.join(',')}</li>`;
+        }
+        abilitiesContente += '</ul>';
+    };
+
+
+    let cardTemplate = `  
+    <ul class="card">
+    <li>Id:${card.id}</li>
+    <li> Nome:${card.name}</li>
+    <li>Costo di Lancio:${card.launchCost}</li>
+    <li>Costo Mana Convertito:${card.combineManaCost}</li>
+    <li>Tipo Carta:${card.cardType}</li>
+    <li>Espansione
+    <ul>
+    <li>Ristampa:${card.expansion.reprintId}</li>
+    <li>Nome:${card.expansion.name}  </li>
+    <li>Rartà:${card.expansion.rarity}  </li>
+    <li>Numero Collezione:${card.expansion.collectionNr}/${card.expansion.totalCard} </li>
+    </ul>
+    </li>
+    <li>Tesco di colore:${card.flavorTex.quote}/${card.flavorTex.author}</li>
+    <li>Abilità:${abilitiesContente} </li>
+    <li>Costituzione:${card.constitution}</li>
+    <li>Forza:${card.strength}</li>
+    <li>Colore bordo:${card.borderColor}</li>
+    <li>Illustrazione:
+    <ul> 
+    <li>Autore:${card.illustration.author.name}(id: ${card.illustration.author.id})</li>
+    <li>Link illustrazione:<img src="${card.illustration.author.source}"/></li>
+
+    </ul >
+    </li >
+    </ul > `;
+
+    return cardTemplate;
+
 };
 
 
-let cardTemple = `  
-<ul class="card">
-<li>Id:${card.id}</li>
-<li> Nome:${card.name}</li>
-<li>Costo di Lancio:${card.launchCost}</li>
-<li>Costo Mana Convertito:${card.combineManaCost}</li>
-<li>Tipo Carta:${card.cardType}</li>
-<li>Espansione
-<ul>
-<li>Ristampa:${card.expansion.reprintId}</li>
-<li>Nome:${card.expansion.name}  </li>
-<li>Rartà:${card.expansion.rarity}  </li>
-<li>Numero Collezione:${card.expansion.collectionNr}/${card.expansion.totalCard} </li>
-</ul>
-</li>
-<li>Tesco di colore:${card.flavorTex.quote}/${card.flavorTex.author}</li>
-<li>Abilità:${abilitiesContente} </li>
-<li>Costituzione:${card.constitution}</li>
-<li>Forza:${card.strength}</li>
-<li>Colore bordo:${card.borderColor}</li>
-<li>Illustrazione:
-<ul> 
-<li>Autore:${card.illustration.author.name}(id: ${card.illustration.author.id})</li>
-<li>Link illustrazione:<img src="${card.illustration.author.source}"/></li>
-<li></li>
-</ul >
 
-
-</li >
-
-
-
-</ul >
-
-    `;
-
-cardSection.innerHTML = cardTemple;
