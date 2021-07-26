@@ -51,13 +51,14 @@ const cardSection = document.getElementById('card');
 
 const subType = card.subType ? `- ${card.subType} ` : '';
 let abilitiesContente = '<em> Nessuna Abilità</em>';
-if (card.abilities.length) {
+if (card.abilities.length > 0) {
     abilitiesContente = '<ul>';
     for (let i = 0; i < card.abilities.length; i++) {
         const currentAbility = card.abilities[i];
         abilitiesContente += ` <li>Descrizione:${currentAbility.description}</li>`;
+        abilitiesContente += `<li>Costo di lancio: ${currentAbility.launchCost.join(',')}</li>`;
     }
-    abilitiesContente = '</ul>';
+    abilitiesContente += '</ul>';
 };
 
 
@@ -78,10 +79,23 @@ let cardTemple = `
 </li>
 <li>Tesco di colore:${card.flavorTex.quote}/${card.flavorTex.author}</li>
 <li>Abilità:${abilitiesContente} </li>
+<li>Costituzione:${card.constitution}</li>
+<li>Forza:${card.strength}</li>
+<li>Colore bordo:${card.borderColor}</li>
+<li>Illustrazione:
+<ul> 
+<li>Autore:${card.illustration.author.name}(id: ${card.illustration.author.id})</li>
+<li>Link illustrazione:<img src="${card.illustration.author.source}"/></li>
+<li></li>
+</ul >
 
 
-</ul>
+</li >
 
-`;
+
+
+</ul >
+
+    `;
 
 cardSection.innerHTML = cardTemple;
