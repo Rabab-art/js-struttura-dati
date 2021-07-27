@@ -198,6 +198,58 @@ const renderDeck = (deck, targertEelement) => {
 const cardSection = document.getElementById('cards');
 renderDeck(myDeck, cardSection);
 
+// FILTER LOGIC
+
+const inputField = document.getElementById('search');
+const selectField = document.getElementById('filter');
+const buttom = document.getElementById('buttom');
+
+/*intercetto il cambio della tendina*/
+selectField.addEventListener('change', () => {
+    const currentValue = selectField.value;
+
+    if (currentValue !== 'all') {
+        inputField.classList.remove('hidden');
+    } else {
+        inputField.classList.add('hidden');
+    }
+
+});
+
+buttom.addEventListener('click', () => {
+    const inputValue = inputField.value;
+    const selectValue = selectField.value;
+
+    if (selectValue === 'all') {
+        renderDeck(myDeck, cardSection);
+        return;
+    }
+
+
+    const filteredDeck = [];
+    for (let i = 0; i < myDeck.length; i++) {
+        const currentCard = myDeck[i];
+
+
+        switch (selectValue) {
+            case 'id':
+            case 'constitution':
+            case 'strenght':
+            case 'cobineManaCost':
+                if (currentCard[selectValue] == inputValue) {
+                    filteredDeck.push(currentCard);
+                }
+                break;
+            default:
+                if (currentCard[selectValue].includes(inputValue)) {
+                    filteredDeck.push(currentCard);
+                }
+                break;
+        }
+    }
+    renderDeck(filteredDeck, cardSection);
+
+});
 
 
 
