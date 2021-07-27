@@ -11,8 +11,21 @@
 
 <body>
 
+    <select id="filter">
+        <option selected value="all">Tutte</option>
+        <option value="id">Id</option>
+        <option value="name">Name</option>
+        <option value="combineManaCost">Mana combinato</option>
+        <option value="cardType">Subtipo carta </option>
+        <option value="costitution">Costituzione</option>
+        <option value="strenght">Forza</option>
+    </select>
+    <input type="search" id="search" placeholder="Scrivi..." class="hiddden" />
+    <button id="buttom">Filtra</button>
+    </hr>
+    <section id="cards"></section>
+    <script src="./js/script.js"></script>
 </body>
-<section id="cards" class="card-style"></section>
-<script src="./js/script.js"></script>
+
 
 </html>
